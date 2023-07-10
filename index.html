@@ -1,47 +1,80 @@
-const express =  require('express');
-const config = require('config');
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Application</title>
+</head>
+<body style="background-color: bisque;">
+  <h1>My Application</h1>
+  <form action="display.html" method="post">
+    <label for="name">userName:</label>
+    <input type="text" id="name" name="name" required><br>
 
-const adminRelatedRoutes = require('./routes/admin');
-const empsRelatedRoutes = require('./routes/emps');
-const customerRelatedRoutes = require('./routes/customer');
-const loginRelatedRoutes = require('./routes/login');
-// const mysql = require('mysql');
-// console.log(express);
+     <label for="phone">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+  
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+  
+    <label for="Age">Age:</label>
+    <input type="tel" id="Age" name="Age" required><br>
 
-const app = express();
+    <label for="radio">Gender:</label>
+    <input type="tel" id="Gender" name="Gender" required><br>
 
-
-// app.use((request, response, next)=>
-// {
-//     response.write("1111111111");
-//     next();
-// })
-
-
-// app.use((request, response, next)=>
-// {
-//     response.write("222222222");
-//     //response.end();
-//     next();
-// })
-
-app.use((request, response, next)=>{
-    response.setHeader('Access-Control-Allow-Origin',"*");
-    response.setHeader('Access-Control-Allow-Headers',"*");
-    response.setHeader('Access-Control-Allow-Methods', "*")
-    next();
-})
-
-app.use(express.json()); //This line is acting as a
-                         //middleware. It sets request.body
-                         //as json data received from body
-                         //which is originally stream.
+    <label for="text">10th:</label>
+    <input type="text" id="10th" name="10th" required><br>
+  
+    <label for="text">12th:</label>
+    <input type="text" id="12th" name="12th" required><br>
+  
+    <label for="text">Degree:</label>
+    <input type="text" id="Degree" name="Degree" required><br>
+  
+    <label for="text">University:</label>
+    <input type="text" id="University" name="University" required><br></br>
+  
+  <input type="submit" value="Submit" onclick="submit">
+  </form>
+  
+</body>
+</html>
 
 
-app.use('/admin',adminRelatedRoutes)
-app.use('/emps',empsRelatedRoutes)
-app.use('/customer',customerRelatedRoutes)
-app.use('/login',loginRelatedRoutes);
 
-const portNo = config.get("PORT");
-app.listen(portNo,()=>{console.log("Server Started at " + portNo)})
+
+
+
+
+
+
+
+
+    
+    
+  
+    
+    
+    
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
