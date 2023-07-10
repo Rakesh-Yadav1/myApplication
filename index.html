@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mywebsite</title>
-  </head>
-  <body>
-    <h1>My Website</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.
-    </p>
-  </body>
-</html>
+const express =  require('express');
+const config = require('config');
+
+const adminRelatedRoutes = require('./routes/admin');
+const empsRelatedRoutes = require('./routes/emps');
+const customerRelatedRoutes = require('./routes/customer');
+const loginRelatedRoutes = require('./routes/login');
+// const mysql = require('mysql');
+// console.log(express);
+
+const app = express();
+
+
+// app.use((request, response, next)=>
+// {
+//     response.write("1111111111");
+//     next();
+// })
+
+
+// app.use((request, response, next)=>
+// {
+//     response.write("222222222");
+//     //response.end();
+//     next();
+// })
+
+app.use((request, response, next)=>{
+    response.setHeader('Access-Control-Allow-Origin',"*");
+    response.setHeader('Access-Control-Allow-Headers',"*");
+    response.setHeader('Access-Control-Allow-Methods', "*")
+    next();
+})
+
+app.use(express.json()); //This line is acting as a
+                         //middleware. It sets request.body
+                         //as json data received from body
+                         //which is originally stream.
+
+
+app.use('/admin',adminRelatedRoutes)
+app.use('/emps',empsRelatedRoutes)
+app.use('/customer',customerRelatedRoutes)
+app.use('/login',loginRelatedRoutes);
+
+const portNo = config.get("PORT");
+app.listen(portNo,()=>{console.log("Server Started at " + portNo)})
